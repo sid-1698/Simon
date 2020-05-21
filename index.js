@@ -30,7 +30,7 @@ function check(currLevel){
     else{
         playAudio('wrong');
         $('body').addClass('game-over');
-        $('#level-title').text('Game Over, Press Any key to start over');
+        $('#level-title').text('Game Over, Click anywhere to start over');
     
         setTimeout(function(){
             $('body').removeClass('game-over');
