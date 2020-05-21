@@ -1,7 +1,7 @@
 var pattern = [];
 var userChoice = [];
 var level = 0;
-var started = false;
+var started = 0;
 
 function playAudio(id){
     const audio = new Audio('sounds/'+id+'.mp3');
@@ -38,7 +38,7 @@ function check(currLevel){
     
         level = 0;
         pattern = [];
-        started = false;
+        started = -1;
     }   
 }
 
@@ -49,21 +49,23 @@ function startGame(){
     pattern.push(randomChoice());
 }
 
-$(document).keypress(function(){
-    if(!started){
-        started = true;
+$(document).click(function(){
+    if(started === 0){
+        started += 1;
         startGame();
-    }   
+    }
+    started += 1;   
 })
 
 $('.btn').on('click',function(){
+    if(started){
     playAudio(this.id);
     self = $(this);
     self.addClass('pressed');
     setTimeout(function(){
         self.removeClass('pressed');
     },100);
-    if(started){userChoice.push(this.id);
+    userChoice.push(this.id);
     check(userChoice.length-1)}
 });
 
